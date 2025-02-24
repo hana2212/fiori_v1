@@ -1,0 +1,19 @@
+<mvc:View controllerName="fiori2.controller.HOME"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns="sap.m">   
+   <Page id="page" title="{i18n>title}">
+    <content>
+    <smartfilterbar:SmartFilterBar id="smartFilterBar"  entitySet="EmployeeSet" persistencyKey="SmartFilter_Explored">
+    </smartfilterbar:SmartFilterBar>
+    <smartTable:SmartTable id="SmartTable" initiallyVisibleFields="ID,NAME,DEPART" 
+        entitySet="EmployeeSet"
+        tableType="ResponsiveTable" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" header="Employee List"
+        showRowCount="true" persistencyKey="SmartTable_Explored" enableAutoBinding="true" enableAutoColumnWidth="false" class="sapUiResponsiveContentPadding">
+    </smartTable:SmartTable>
+    </content>
+    </Page> 
+     
+</mvc:View>

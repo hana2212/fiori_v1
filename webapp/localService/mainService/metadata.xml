@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZODATA_EMPLOYEE_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Employee" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ID" sap:creatable="true" sap:updatable="true" sap:sortable="true" sap:filterable="true"/>
+                <Property Name="NAME" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="NAME" sap:creatable="true" sap:updatable="true" sap:sortable="true" sap:filterable="true"/>
+                <Property Name="DEPART" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DEPART" sap:creatable="true" sap:updatable="true" sap:sortable="true" sap:filterable="true"/>
+            </EntityType>
+            <EntityContainer Name="ZODATA_EMPLOYEE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="EmployeeSet" EntityType="ZODATA_EMPLOYEE_SRV.Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://hana.ciber.vn:8012/sap/opu/odata/sap/ZODATA_EMPLOYEE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://hana.ciber.vn:8012/sap/opu/odata/sap/ZODATA_EMPLOYEE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
