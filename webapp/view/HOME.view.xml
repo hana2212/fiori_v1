@@ -11,43 +11,100 @@
         title="{i18n>title}"
     >
         <content>
+            <smartFilterBar:SmartFilterBar 
+                id="smartFilterBar" 
+                entitySet="EmployeeSet" 
+                persistencyKey="SmartFilter_Explored"
+            >
+                <smartFilterBar:controlConfiguration>
+                    <smartFilterBar:ControlConfiguration 
+                        key="ID" 
+                        visibleInAdvancedArea="true"  
+                        groupId="_BASIC"
+                    >
+                        <!--
+                        <smartFilterBar:defaultFilterValues>
+                            <smartFilterBar:SelectOption> </smartFilterBar:SelectOption>
+                        </smartFilterBar:defaultFilterValues>
+                        -->
+                    </smartFilterBar:ControlConfiguration>
 
-    <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="EmployeeSet" persistencyKey="SmartFilter_Explored">
-        <smartFilterBar:controlConfiguration>
-            <smartFilterBar:ControlConfiguration key="ID" visibleInAdvancedArea="true" id="IDquery" groupId="_BASIC" >
-                <smartFilterBar:defaultFilterValues>
-                    <smartFilterBar:SelectOption low="1" high="10"> </smartFilterBar:SelectOption>
-                </smartFilterBar:defaultFilterValues>
-            </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration 
+                        key="NAME" 
+                        visibleInAdvancedArea="true"
+                    >
+                    </smartFilterBar:ControlConfiguration>
 
-			 <smartFilterBar:ControlConfiguration key="NAME" visibleInAdvancedArea="true" id="NAMEquery"  >
-                <smartFilterBar:defaultFilterValues>
-                    <smartFilterBar:SelectOption low="NGUYEN" > </smartFilterBar:SelectOption>
-                </smartFilterBar:defaultFilterValues>
-            </smartFilterBar:ControlConfiguration>
-            
-			<smartFilterBar:ControlConfiguration key="DEPART" visibleInAdvancedArea="true" id="DEPARTquery">
-                <smartFilterBar:defaultFilterValues>
-                    <smartFilterBar:SelectOption  > </smartFilterBar:SelectOption>
-                </smartFilterBar:defaultFilterValues>
-            </smartFilterBar:ControlConfiguration>
-			
-        </smartFilterBar:controlConfiguration>
-    </smartFilterBar:SmartFilterBar>
+                    <smartFilterBar:ControlConfiguration 
+                        key="DEPART" 
+                        visibleInAdvancedArea="true"
+                    >
+                    </smartFilterBar:ControlConfiguration>
 
-    <smartTable:SmartTable id="SmartTable" initiallyVisibleFields="ID,NAME,DEPART" 
-        entitySet="EmployeeSet"
-        tableType="ResponsiveTable" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" header="Employee List"
-        showRowCount="true" persistencyKey="SmartTable_Explored" enableAutoBinding="true" enableAutoColumnWidth="false" class="sapUiResponsiveContentPadding">
-<!--		<Table id="idTable" mode="MultiSelect">
-			<headerToolbar>
-				<OverflowToolbar> 
-				<ToolbarSpacer ></ToolbarSpacer>
-				<Button class="sapUiSmallMarrginBeginEnd" type="Reject" icon="sap-icon://delete" text="Delete" press="onDelete" />
-				</OverflowToolbar>
-			</headerToolbar>
-	   </Table>-->
-    </smartTable:SmartTable>		
+                </smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+
+            <smartTable:SmartTable 
+                id="SmartTable" 
+                initiallyVisibleFields="ID,NAME,DEPART"
+                smartFilterId="smartFilterBar"
+                entitySet="EmployeeSet"
+                tableType="ResponsiveTable" 
+                enableExport="true" 
+                useVariantManagement="true" 
+                useTablePersonalisation="true" 
+                header="Employee List"
+                showRowCount="true" 
+                persistencyKey="SmartTable_Explored" 
+                enableAutoBinding="true"
+                enableAutoColumnWidth="false" 
+                class="sapUiResponsiveContentPadding"
+            >
+                <!--Select lines-->
+                <Table id="idTable" mode="MultiSelect">
+                    <headerToolbar>
+                        <OverflowToolbar> 
+                            <ToolbarSpacer></ToolbarSpacer>
+                            <Button 
+                                class="sapUiSmallMarrginBeginEnd" 
+                                type="Emphasized" 
+                                icon="sap-icon://create" 
+                                text="Create" 
+                                press="onCreate" 
+                            />
+                              <Button 
+                                class="sapUiSmallMarrginBeginEnd" 
+                                type="Default" 
+                                icon="sap-icon://edit" 
+                                text="Edit" 
+                                press="onUpdate" 
+                            />
+                              <Button 
+                                class="sapUiSmallMarrginBeginEnd" 
+                                type="Reject" 
+                                icon="sap-icon://delete" 
+                                text="Delete" 
+                                press="onDelete" 
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                </Table> 
+                <Dialog id="inputDialog" title="Create New Item" afterClose="onDialogClose">
+                        <VBox>
+                        <Label text="Id" />
+                        <Input id="idInput" placeholder="Enter Id" />
+                        
+                        <Label text="Name" />
+                        <Input id="nameInput" placeholder="Enter Name" />
+                        
+                        <Label text="Department" />
+                        <Input id="departInput" placeholder="Enter Department" />
+                        
+                        <Button text="Submit" press="onSubmit"/>
+                        </VBox>
+                </Dialog>
+                <!--END SELECT LINES-->
+            </smartTable:SmartTable>
         </content>
     </Page>
 </mvc:View>

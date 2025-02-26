@@ -7,9 +7,9 @@
                 <Key>
                     <PropertyRef Name="ID"/>
                 </Key>
-                <Property Name="ID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ID" sap:creatable="true" sap:updatable="true" sap:sortable="true" sap:filterable="true"/>
-                <Property Name="NAME" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="NAME" sap:creatable="true" sap:updatable="true" sap:sortable="true" sap:filterable="true"/>
-                <Property Name="DEPART" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DEPART" sap:creatable="true" sap:updatable="true" sap:sortable="true" sap:filterable="true"/>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ID" sap:creatable="false"  />
+                <Property Name="NAME" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="NAME" sap:creatable="false"  />
+                <Property Name="DEPART" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DEPART" sap:creatable="false" />
             </EntityType>
             <EntityContainer Name="ZODATA_EMPLOYEE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="EmployeeSet" EntityType="ZODATA_EMPLOYEE_SRV.Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
