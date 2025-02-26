@@ -90,6 +90,17 @@
                     </headerToolbar>
                 </Table> 
                 <Dialog id="inputDialog" title="Create New Item" afterClose="onDialogClose">
+                     <customHeader>
+                        <Toolbar>
+                            <Title text="Create New Item" />
+                            <ToolbarSpacer /> 
+                            <Button 
+                                icon="sap-icon://decline" 
+                                class="sapUiSmallMarginBeginEnd" 
+                                press="onCloseDialog"
+                            />
+                        </Toolbar>
+                    </customHeader> 
                         <VBox>
                         <Label text="Id" />
                         <Input id="idInput" placeholder="Enter Id" />
