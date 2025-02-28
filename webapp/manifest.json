@@ -90,7 +90,7 @@
             },
             "routes": [
                 {
-                    "name": "RouteHOME",
+                    "name": "HOME",
                     "pattern": ":?query:",
                     "target": [
                         "TargetHOME"
@@ -98,7 +98,7 @@
                 }, 
                 {
                     "name": "Detail",
-                    "pattern": "Detail",
+                    "pattern": "Detail/{ID}",
                     "target": [
                         "Detail"
                     ]

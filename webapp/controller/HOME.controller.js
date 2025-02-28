@@ -17,7 +17,7 @@ sap.ui.define([
           var jModel = sap.ui.model.json.JSONModel(odata);
           that.getView().byId("ID").SetModel(jModel);
         }, error: function () {
-          console.log("can not get data");
+          console.log("can not get data"); ku
         }
 
       })
@@ -65,7 +65,7 @@ sap.ui.define([
       oModel.setUseBatch(false); // not batch mode 
       var items = this.getView().byId("idTable").getSelectedItems();
       items.forEach(val => {
-        var id = val.getBindingContext().getProperty("ID"); // field 
+        var id = val.getBindingContext().getProperty("ID"); // property name in line item
         id = id.trim();
         // Update data via ID 
         var oUpdateEntry = {
@@ -113,19 +113,11 @@ sap.ui.define([
       });
       //}
     },
-    handleListEmployeePress: function (oEvent) {
-    /*  var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      var selectedProductId = oEvent.getSource().getBindingContext().getProperty("ID");
-      oRouter.navTo("detail", {
-        productId: selectedProductId
-      });  */
+    onColumnListItemPress: function (oEvent) {
+      var sSelectedId = oEvent.getSource().getBindingContext().getProperty("ID");
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      oRouter.navTo("Detail"); 
-    }, 
-    onColumnListItemPress: function(){
-      console.log("row selection");
-      
+      oRouter.navTo("Detail", { ID: sSelectedId });
     }
-    
+
   });
 });
