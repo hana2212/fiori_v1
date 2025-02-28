@@ -1,0 +1,10 @@
+<mvc:View   
+    controllerName="fiori2.controller.Detail" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    displayBlock="true"
+    xmlns="sap.m">
+   
+    <Page id="listPage" title="{i18n>DetailTitle}"  showNavButton="true" navButtonPress=".onNavBack">
+        
+    </Page>
+</mvc:View>

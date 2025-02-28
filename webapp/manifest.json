@@ -95,12 +95,23 @@
                     "target": [
                         "TargetHOME"
                     ]
+                }, 
+                {
+                    "name": "Detail",
+                    "pattern": "Detail",
+                    "target": [
+                        "Detail"
+                    ]
                 }
             ],
             "targets": {
                 "TargetHOME": {
                     "id": "HOME",
                     "name": "HOME"
+                }, 
+                "Detail": {
+                    "id": "Detail",
+                    "name": "Detail"
                 }
             }
         },

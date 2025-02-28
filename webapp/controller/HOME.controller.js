@@ -22,15 +22,10 @@ sap.ui.define([
 
       })
     },
-/*
-    onCreateDialog: function () {
-      var oDialog = this.byId("createDialog");
-      if (!oDialog) {
-        oDialog = sap.ui.xmlfragment(this.getView().getId(), "your.namespace.view.PopupFragment", this);
-        this.getView().addDependent(oDialog);
-      }
-      oDialog.open();
-    },*/
+    onCloseDialog: function () {
+      var oDialog = this.byId("inputDialog");
+      oDialog.close();
+    },
     onCreate: function () {
       // open dialog
       var oDialog = this.byId("inputDialog");
@@ -54,9 +49,9 @@ sap.ui.define([
       oModel.create("/EmployeeSet", oNewEntry, {
         success: function () {
           sap.m.MessageBox.success("Created");
-      },       
+        },
         error: function (oError) {
-          ap.m.MessageBox.success(oError);
+          sap.m.MessageBox.success(oError);
         }
       });
       // Close dialog 
@@ -75,7 +70,7 @@ sap.ui.define([
         // Update data via ID 
         var oUpdateEntry = {
           ID: '',
-          TYPE: ''
+          TYPE: 'UPDATE'
         }
         oUpdateEntry.DepartmentSet = [];
         oModel.create("/EmployeeSet", oUpdateEntry), {
@@ -91,42 +86,46 @@ sap.ui.define([
       }
       )
     },
-    /*          onDelete: function (sPath) {
-                var oModel = this.getView().getModel();
-                oModel.remove(sPath, {
-                  success: function () {
-                    MessageToast.show("delete Success");
-                  },
-                  error: function () {
-                    MessageToast.show("can not delete");
-                  }
-                });
-              } 
-    */
     onDelete: function (oEvent) {
+
+      // sap.m.MessageBox.confirm("Ban co chac muon xoa khong"); 
+      //if ( sap.m.MessageBox.ACTION === "OK"){
       var oModel = this.getView().byId("SmartTable").getModel();
       oModel.setUseBatch(false);
       var items = this.getView().byId("idTable").getSelectedItems();
-      console.log(items);
       items.forEach(val => {
-        var id = val.getBindingContext().getProperty("NAME");  // FIELD
-        id = id.trim();
-        //    id = "'" + id + "'";
-
-        console.log(id);
-        oModel.create("/EmployeeSet(" + id + ")"), {
+        var oId = val.getBindingContext().getProperty("ID");  // FIELD
+        oId = oId.trim();
+        console.log(oId);
+        var oDeleteEntry = {
+          ID: oId,
+          TYPE: "DELETE"
+        }
+        oDeleteEntry.DepartmentSet = [];
+        oModel.create("/EmployeeSet", oDeleteEntry, {
           success: function () {
-            console.log("ok");
-
+            sap.m.MessageBox.success("Delete");
           },
           error: function (oError) {
-            console.log("oError");
+            sap.m.MessageBox.error(oError);
           }
-        };
-
+        })
       });
-
+      //}
+    },
+    handleListEmployeePress: function (oEvent) {
+    /*  var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+      var selectedProductId = oEvent.getSource().getBindingContext().getProperty("ID");
+      oRouter.navTo("detail", {
+        productId: selectedProductId
+      });  */
+      var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+      oRouter.navTo("Detail"); 
+    }, 
+    onColumnListItemPress: function(){
+      console.log("row selection");
+      
     }
-
+    
   });
 });
