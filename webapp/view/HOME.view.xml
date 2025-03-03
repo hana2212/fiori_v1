@@ -62,7 +62,7 @@
                 
             >
                 <!--Select lines-->
-              <Table id="idTable" mode="MultiSelect"   alternateRowColors="true">
+              <Table id="tableHome" mode="MultiSelect"   alternateRowColors="true">
                     <headerToolbar>
                         <OverflowToolbar> 
                             <ToolbarSpacer></ToolbarSpacer>
@@ -92,7 +92,7 @@
                      <!--Button nav to detail-->
                     <items>
                         <ColumnListItem
-                            id="idColumnDetail"
+                            id="listItem"
                             type="Navigation"
                             press="onColumnListItemPress"
                         >

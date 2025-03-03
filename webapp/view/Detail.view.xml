@@ -35,6 +35,18 @@
 				<semantic:multiSelectAction>
 					<semantic:MultiSelectAction press="onMultiSelectPress"/>
 				</semantic:multiSelectAction>
+<!--Fill data to department-->
+				<List
+						id="employeeListDetail"
+						items="{Employees>/}">
+				    <StandardListItem
+							type="Navigation"
+							press=".onPressListEmployee"
+							title="{Employees>ID}"
+							description="{Employees>NAME} - {Employees>DEPART}"
+                    />
+<!--end fill data -->
+    </List>
 			</semantic:MasterPage>
 		</masterPages>
 		<detailPages>
@@ -42,16 +54,16 @@
 					title="{i18n>DetailTitle}">
 <!--Fill data from Employees model -->
                 <semantic:content>
-                   <Table id="DetailPageEmployee" items="{/Employees}">
+                   <Table id="DetailPageEmployee" items="{Employee>/}">
                         <columns>
                             <Column>
-                                <Text text="ID"/>
+                                <Text text="Name"/>
                             </Column>                                        
                         </columns>
                         <items>
                             <ColumnListItem >
                                 <cells> 
-                                    <Text text="{ID}"/>
+                                    <Text text="{Employee>NAME}"/>
                                 </cells>
                             </ColumnListItem>
                        </items>  

@@ -116,7 +116,7 @@ sap.ui.define([
     onColumnListItemPress: function (oEvent) {
       var sSelectedId = oEvent.getSource().getBindingContext().getProperty("ID");
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      oRouter.navTo("Detail", { ID: sSelectedId });
+      oRouter.navTo("Detail", { ID: sSelectedId  });
     }
 
   });
