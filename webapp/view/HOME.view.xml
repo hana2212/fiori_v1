@@ -87,6 +87,13 @@
                                 text="Delete" 
                                 press="onDelete" 
                             />
+                             <Button 
+                                class="sapUiSmallMarrginBeginEnd" 
+                                type="Default" 
+                                icon="sap-icon://document" 
+                                text="Export PDF" 
+                                press="onDataExportPDF" 
+                            />
                         </OverflowToolbar>
                     </headerToolbar>
                      <!--Button nav to detail-->

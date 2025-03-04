@@ -75,6 +75,7 @@
                     "uri": "css/style.css"
                 }
             ]
+            
         },
         "routing": {
             "config": {

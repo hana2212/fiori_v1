@@ -5,48 +5,32 @@
     xmlns="sap.m"
     height="100%"
     xmlns:core="sap.ui.core"
-    xmlns:semantic="sap.m.semantic">
+    xmlns:semantic="sap.m.semantic"
+	xmlns:smartchart="sap.ui.comp.smartchart"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:sl="sap.ui.comp.navpopover"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
    
     <Page id="listPage" title="{i18n>DetailTitle}"  showNavButton="true" navButtonPress=".onNavBack">
-        	<SplitContainer>
+    <SplitContainer>
 		<masterPages>
 			<semantic:MasterPage title="{i18n>MasterTitle}" >
-				<semantic:landmarkInfo>
-					<PageAccessibleLandmarkInfo rootLabel="Root label" headerLabel="Header label" footerLabel="Footer label"></PageAccessibleLandmarkInfo>
-				</semantic:landmarkInfo>
-				<semantic:sort>
-					<semantic:SortSelect change="onSemanticSelectChange"
-											 items="{
-							path: '//Filters',
-							sorter: { path: 'ID' }
-							}">
-						<core:Item key="{type}" text="{type}" />
-					</semantic:SortSelect>
-				</semantic:sort>
-				<semantic:filter>
-					<semantic:FilterAction press="onSemanticButtonPress"/>
-				</semantic:filter>
-				<semantic:group>
-					<semantic:GroupAction press="onSemanticButtonPress"/>
-				</semantic:group>
-				<semantic:addAction>
-					<semantic:AddAction press="onSemanticButtonPress"/>
-				</semantic:addAction>
-				<semantic:multiSelectAction>
-					<semantic:MultiSelectAction press="onMultiSelectPress"/>
-				</semantic:multiSelectAction>
-<!--Fill data to department-->
+<!--Employee list-->
+				<OverflowToolbar>
+					<SearchField id="searchDetail"   liveChange=".onSearch"  search=".onSearch" width="100%" /> 
+				</OverflowToolbar>
 				<List
 						id="employeeListDetail"
-						items="{Employees>/}">
-				    <StandardListItem
+						items="{Employees>/}">	
+					<StandardListItem
 							type="Navigation"
 							press=".onPressListEmployee"
 							title="{Employees>ID}"
 							description="{Employees>NAME} - {Employees>DEPART}"
                     />
-<!--end fill data -->
-    </List>
+   				</List>
+<!--Employee list-->
 			</semantic:MasterPage>
 		</masterPages>
 		<detailPages>
@@ -68,44 +52,8 @@
                             </ColumnListItem>
                        </items>  
                    </Table>
-               </semantic:content> 
+               </semantic:content>
 <!--End fill data-->
-				<semantic:positiveAction>
-					<semantic:PositiveAction text="Positive" press="onSemanticButtonPress"/>
-				</semantic:positiveAction>
-				<semantic:negativeAction>
-					<semantic:NegativeAction text="Negative" press="onSemanticButtonPress"/>
-				</semantic:negativeAction>
-				<semantic:forwardAction>
-					<semantic:ForwardAction press="onSemanticButtonPress"/>
-				</semantic:forwardAction>
-				<semantic:flagAction>
-					<semantic:FlagAction press="onSemanticButtonPress"/>
-				</semantic:flagAction>
-				<semantic:favoriteAction>
-					<semantic:FavoriteAction press="onSemanticButtonPress"/>
-				</semantic:favoriteAction>
-				<semantic:sendEmailAction>
-					<semantic:SendEmailAction press="onSemanticButtonPress"/>
-				</semantic:sendEmailAction>
-				<semantic:sendMessageAction>
-					<semantic:SendMessageAction press="onSemanticButtonPress"/>
-				</semantic:sendMessageAction>
-				<semantic:discussInJamAction>
-					<semantic:DiscussInJamAction press="onSemanticButtonPress"/>
-				</semantic:discussInJamAction>
-				<semantic:shareInJamAction>
-					<semantic:ShareInJamAction press="onSemanticButtonPress"/>
-				</semantic:shareInJamAction>
-				<semantic:printAction>
-					<semantic:PrintAction press="onSemanticButtonPress"/>
-				</semantic:printAction>
-				<semantic:messagesIndicator>
-					<semantic:MessagesIndicator press="onMessagesButtonPress"/>
-				</semantic:messagesIndicator>
-				<semantic:pagingAction>
-					<PagingButton count="5" positionChange="onPositionChange"/>
-				</semantic:pagingAction>
 
 				<semantic:customFooterContent>
 					<OverflowToolbarButton icon="sap-icon://settings" text="Settings" press="onPress"/>
@@ -118,10 +66,7 @@
 				</semantic:customShareMenuContent>
 
 			</semantic:DetailPage>
-
 		</detailPages>
-
 	</SplitContainer>
-
     </Page>
 </mvc:View>

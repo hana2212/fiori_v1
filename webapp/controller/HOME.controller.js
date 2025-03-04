@@ -63,7 +63,7 @@ sap.ui.define([
     onUpdate: function () {
       var oModel = this.getView().byId("SmartTable").getModel();
       oModel.setUseBatch(false); // not batch mode 
-      var items = this.getView().byId("idTable").getSelectedItems();
+      var items = this.getView().byId("tableHome").getSelectedItems();
       items.forEach(val => {
         var id = val.getBindingContext().getProperty("ID"); // property name in line item
         id = id.trim();
@@ -92,7 +92,7 @@ sap.ui.define([
       //if ( sap.m.MessageBox.ACTION === "OK"){
       var oModel = this.getView().byId("SmartTable").getModel();
       oModel.setUseBatch(false);
-      var items = this.getView().byId("idTable").getSelectedItems();
+      var items = this.getView().byId("tableHome").getSelectedItems();
       items.forEach(val => {
         var oId = val.getBindingContext().getProperty("ID");  // FIELD
         oId = oId.trim();
@@ -113,10 +113,13 @@ sap.ui.define([
       });
       //}
     },
+    onDataExportPDF: function () {
+      
+    },
     onColumnListItemPress: function (oEvent) {
       var sSelectedId = oEvent.getSource().getBindingContext().getProperty("ID");
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      oRouter.navTo("Detail", { ID: sSelectedId  });
+      oRouter.navTo("Detail", { ID: sSelectedId });
     }
 
   });
