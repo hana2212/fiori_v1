@@ -6,13 +6,15 @@ sap.ui.define([
   "sap/m/Label",
   "sap/m/Text",
   "sap/ui/table/Table",
-  "sap/ui/table/Column"
-], (Controller,ValueHelpDialog , JSONModel, ColumnListItem,Table, Column, Label, Text ) => {
+  "sap/ui/table/Column",
+  "sap/ui/model/Filter",
+  "sap/ui/model/FilterOperator"
+], function (Controller, ValueHelpDialog, JSONModel, ColumnListItem, Label, Text, Table, Column, Filter, FilterOperator) {
   "use strict";
 
   return Controller.extend("fiori2.controller.HOME", {
     onInit: function () {
-      // this.onReadAll();
+       this.onReadAll();
     },
     // read data 
     onReadAll: function () {
@@ -68,7 +70,7 @@ sap.ui.define([
     }
     ,
     onUpdate: function () {
-      var oModel = this.getView().byId("SmartTable").getModel();
+      var oModel = this.getView().byId("smartTable").getModel();
       oModel.setUseBatch(false); // not batch mode 
       var items = this.getView().byId("tableHome").getSelectedItems();
       items.forEach(val => {
@@ -97,7 +99,7 @@ sap.ui.define([
 
       // sap.m.MessageBox.confirm("Ban co chac muon xoa khong"); 
       //if ( sap.m.MessageBox.ACTION === "OK"){
-      var oModel = this.getView().byId("SmartTable").getModel();
+      var oModel = this.getView().byId("smartTable").getModel();
       oModel.setUseBatch(false);
       var items = this.getView().byId("tableHome").getSelectedItems();
       items.forEach(val => {
@@ -128,8 +130,70 @@ sap.ui.define([
       var sSelectedId = oEvent.getSource().getBindingContext().getProperty("ID");
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
       oRouter.navTo("Detail", { ID: sSelectedId });
-    } ,
-    
+    },
+    onValueHelpRequestFilter: function (oEvent) {
+      var oView = this.getView();
+      var oInput = oEvent.getSource();
 
+      if (!this._oValueHelpDialog) {
+          this._oValueHelpDialog = new ValueHelpDialog({
+              title: "Select Employee",
+              supportMultiselect: false,
+              key: "ID",
+              descriptionKey: "DEPART",
+              ok: function (oEvent) {
+                  var aTokens = oEvent.getParameter("tokens");
+                  oInput.setTokens(aTokens);
+                  this.close();
+              },
+              cancel: function () {
+                  this.close();
+              }
+          });
+
+          oView.addDependent(this._oValueHelpDialog);
+
+          // Create a table for the ValueHelpDialog
+          var oTable = new Table({
+              columns: [
+                  new Column({
+                      label: new Label({ text: "ID" }),
+                      template: new Text({ text: "{ID}" })
+                  }),
+                  new Column({
+                      label: new Label({ text: "Depart" }),
+                      template: new Text({ text: "{DEPART}" })
+                  }), 
+                  new Column({
+                    label: new Label({ text: "Name" }),
+                    template: new Text({ text: "{NAME}" })
+                })
+              ]
+          });
+
+          this._oValueHelpDialog.setTable(oTable);
+      }
+
+     
+      // Set the model for the ValueHelpDialog
+      var oModel = this.getView().getModel();
+      var sPath = "/EmployeeSet";
+     // var oFilter = new sap.ui.model.Filter("ID", FilterOperator.Contains, oInput.getValue());
+      var oFilter = new sap.ui.model.Filter("ID", FilterOperator.EQ, "222");
+      
+      oModel.read(sPath, {
+        //  filters: [oFilter],
+          success: (oData) => {
+              var oSearchModel = new JSONModel(oData.results);
+              this._oValueHelpDialog.getTable().setModel(oSearchModel);
+              this._oValueHelpDialog.getTable().bindRows("/");
+          },
+          error: (oError) => {
+              console.error("Error fetching data: ", oError);
+          }
+      });
+      // Open the ValueHelpDialog
+      this._oValueHelpDialog.open();
+  }
   });
 });

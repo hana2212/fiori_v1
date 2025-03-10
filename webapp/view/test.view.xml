@@ -1,30 +1,51 @@
 <mvc:View
-    controllerName="fiori2.controller.test"
-    xmlns:mvc="sap.ui.core.mvc"
-	xmlns:form="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
-	xmlns="sap.m">
-    <form:SimpleForm editable="true">
-        <Label text="ID" labelFor="multiInput" />
-        <MultiInput id="multiInput" valueHelpRequest="onValueHelpRequest" showValueHelp="true"
-        suggestionRows="{
-            path: '/EmployeeSet',
-            length: 5
-        }">
-        <suggestionColumns>
-            <Column >
-                <Label text="Company Code"/>
-            </Column>
-            <Column >
-                <Label text="Document Number"/>
-            </Column>
-        </suggestionColumns>
-        <suggestionRows>
-            <ColumnListItem>
-                    <Text text="{ID}"/>
-                    <Text text="{DEPART}"/>
-            </ColumnListItem>
-        </suggestionRows>
-        </MultiInput>
-    </form:SimpleForm>
+	xmlns="sap.f"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:sfb="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:sv="sap.ui.comp.smartvariants"
+	controllerName="fiori2.controller.test"
+	height="100%">
+
+	<m:Button id="toggleUpdateMode" text="Change to 'LiveMode'" press="toggleUpdateMode"/>
+	<DynamicPage id="dynamicPage" fitContent="true">
+		<header>
+			<DynamicPageHeader>
+				<sfb:SmartFilterBar
+                    id="smrtFilterBar"
+                    entitySet="EmployeeSet"
+                    enableBasicSearch="true"
+                    basicSearchFieldName="ID"
+                    persistencyKey="UniqueAndStablePersistencyKey">
+                    <sfb:customData>
+						<core:CustomData key="defaultFilterBarExpanded" value='{"CompanyCode": "true"}'/>
+						<core:CustomData key="defaultShowAllFilters" value='{"CompanyCode": "true"}'/>
+					</sfb:customData>     
+                </sfb:SmartFilterBar>
+
+			</DynamicPageHeader>
+		</header>
+		<content>
+			<smartTable:SmartTable
+				id="smrtTable"
+				entitySet="EmployeeSet"
+				smartFilterId="smrtFilterBar"
+                initiallyVisibleFields="ID,DEPART,NAME"
+				tableType="Table"
+				enableAutoColumnWidth="true"
+				useTablePersonalisation="true"
+				header="Employee List"
+				showRowCount="true">
+				<smartTable:layoutData>
+					<m:FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+					<smartTable:customData>
+						<core:CustomData key="defaultShowAllFilters" value='{"ID": "true"}'/>
+						<core:CustomData key="defaultFilterBarExpanded" value='{"ID": "true"}'/>
+					</smartTable:customData>
+			</smartTable:SmartTable>
+		</content>
+	</DynamicPage>
 </mvc:View>
