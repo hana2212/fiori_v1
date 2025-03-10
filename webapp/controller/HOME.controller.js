@@ -1,6 +1,13 @@
 sap.ui.define([
-  "sap/ui/core/mvc/Controller"
-], (Controller) => {
+  "sap/ui/core/mvc/Controller",
+  "sap/ui/comp/valuehelpdialog/ValueHelpDialog",
+  "sap/ui/model/json/JSONModel",
+  "sap/m/ColumnListItem",
+  "sap/m/Label",
+  "sap/m/Text",
+  "sap/ui/table/Table",
+  "sap/ui/table/Column"
+], (Controller,ValueHelpDialog , JSONModel, ColumnListItem,Table, Column, Label, Text ) => {
   "use strict";
 
   return Controller.extend("fiori2.controller.HOME", {
@@ -17,7 +24,7 @@ sap.ui.define([
           var jModel = sap.ui.model.json.JSONModel(odata);
           that.getView().byId("ID").SetModel(jModel);
         }, error: function () {
-          console.log("can not get data"); ku
+          console.log("can not get data");
         }
 
       })
@@ -113,14 +120,16 @@ sap.ui.define([
       });
       //}
     },
-    onDataExportPDF: function () {
-      
+    onNextPage: function () {
+      var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+      oRouter.navTo("test");
     },
     onColumnListItemPress: function (oEvent) {
       var sSelectedId = oEvent.getSource().getBindingContext().getProperty("ID");
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
       oRouter.navTo("Detail", { ID: sSelectedId });
-    }
+    } ,
+    
 
   });
 });

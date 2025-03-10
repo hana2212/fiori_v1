@@ -1,0 +1,30 @@
+<mvc:View
+    controllerName="fiori2.controller.test"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+    <form:SimpleForm editable="true">
+        <Label text="ID" labelFor="multiInput" />
+        <MultiInput id="multiInput" valueHelpRequest="onValueHelpRequest" showValueHelp="true"
+        suggestionRows="{
+            path: '/EmployeeSet',
+            length: 5
+        }">
+        <suggestionColumns>
+            <Column >
+                <Label text="Company Code"/>
+            </Column>
+            <Column >
+                <Label text="Document Number"/>
+            </Column>
+        </suggestionColumns>
+        <suggestionRows>
+            <ColumnListItem>
+                    <Text text="{ID}"/>
+                    <Text text="{DEPART}"/>
+            </ColumnListItem>
+        </suggestionRows>
+        </MultiInput>
+    </form:SimpleForm>
+</mvc:View>

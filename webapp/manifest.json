@@ -103,6 +103,13 @@
                     "target": [
                         "Detail"
                     ]
+                }, 
+                {
+                    "name": "test",
+                    "pattern": "test",
+                    "target": [
+                        "test"
+                    ]
                 }
             ],
             "targets": {
@@ -113,6 +120,10 @@
                 "Detail": {
                     "id": "Detail",
                     "name": "Detail"
+                }, 
+                "test": {
+                    "id": "test",
+                    "name": "test"
                 }
             }
         },
