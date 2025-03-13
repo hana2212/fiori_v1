@@ -15,7 +15,7 @@
                 <smartFilterBar:controlConfiguration>
                     <smartFilterBar:ControlConfiguration key="ID" visibleInAdvancedArea="true" >
                         <smartFilterBar:customControl>
-                            <MultiInput id="multiInputFilter" valueHelpRequest="onValueHelpRequestFilter" >
+                            <MultiInput id="multiInputFilter" valueHelpRequest="onValueHelpRequestFilter" > 
                             </MultiInput>
                         </smartFilterBar:customControl>
                     </smartFilterBar:ControlConfiguration>                
@@ -38,6 +38,7 @@
                 enableAutoBinding="true"
                 enableAutoColumnWidth="false"  
                 class="sapUiResponsiveContentPadding"
+                beforeRebindTable="onBeforeRebindTable"
              >
 
            

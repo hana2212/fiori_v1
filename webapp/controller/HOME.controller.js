@@ -14,7 +14,7 @@ sap.ui.define([
 
   return Controller.extend("fiori2.controller.HOME", {
     onInit: function () {
-       this.onReadAll();
+   //   this.onReadAll();
     },
     // read data 
     onReadAll: function () {
@@ -123,6 +123,8 @@ sap.ui.define([
       //}
     },
     onNextPage: function () {
+      console.log("next page");
+      
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
       oRouter.navTo("test");
     },
@@ -136,64 +138,86 @@ sap.ui.define([
       var oInput = oEvent.getSource();
 
       if (!this._oValueHelpDialog) {
-          this._oValueHelpDialog = new ValueHelpDialog({
-              title: "Select Employee",
-              supportMultiselect: false,
-              key: "ID",
-              descriptionKey: "DEPART",
-              ok: function (oEvent) {
-                  var aTokens = oEvent.getParameter("tokens");
-                  oInput.setTokens(aTokens);
-                  this.close();
-              },
-              cancel: function () {
-                  this.close();
-              }
-          });
+        this._oValueHelpDialog = new ValueHelpDialog({
+          title: "Select Employee List",
+          supportMultiselect: true,
+          key: "ID",
+          ok: function (oEvent) {
+            var aTokens = oEvent.getParameter("tokens");
 
-          oView.addDependent(this._oValueHelpDialog);
+            aTokens.forEach(token => {
+              var sKey = token.getKey();
+              token.setKey(sKey);
+              token.setText(sKey);
+            });
+            oInput.setTokens(aTokens);
+            this.close();
+          },
+          cancel: function () {
+            this.close();
+          }
+        });
 
-          // Create a table for the ValueHelpDialog
-          var oTable = new Table({
-              columns: [
-                  new Column({
-                      label: new Label({ text: "ID" }),
-                      template: new Text({ text: "{ID}" })
-                  }),
-                  new Column({
-                      label: new Label({ text: "Depart" }),
-                      template: new Text({ text: "{DEPART}" })
-                  }), 
-                  new Column({
-                    label: new Label({ text: "Name" }),
-                    template: new Text({ text: "{NAME}" })
-                })
-              ]
-          });
+        oView.addDependent(this._oValueHelpDialog);
 
-          this._oValueHelpDialog.setTable(oTable);
+        // Create a table for the ValueHelpDialog
+        var oTable = new Table({
+          columns: [
+            new Column({
+              label: new Label({ text: "ID" }),
+              template: new Text({ text: "{ID}" })
+            }),
+            new Column({
+              label: new Label({ text: "Depart" }),
+              template: new Text({ text: "{DEPART}" })
+            }),
+            new Column({
+              label: new Label({ text: "Name" }),
+              template: new Text({ text: "{NAME}" })
+            })
+          ]
+        });
+
+        this._oValueHelpDialog.setTable(oTable);
       }
 
-     
+
       // Set the model for the ValueHelpDialog
       var oModel = this.getView().getModel();
       var sPath = "/EmployeeSet";
-     // var oFilter = new sap.ui.model.Filter("ID", FilterOperator.Contains, oInput.getValue());
+      // var oFilter = new sap.ui.model.Filter("ID", FilterOperator.Contains, oInput.getValue());
       var oFilter = new sap.ui.model.Filter("ID", FilterOperator.EQ, "222");
-      
+
       oModel.read(sPath, {
         //  filters: [oFilter],
-          success: (oData) => {
-              var oSearchModel = new JSONModel(oData.results);
-              this._oValueHelpDialog.getTable().setModel(oSearchModel);
-              this._oValueHelpDialog.getTable().bindRows("/");
-          },
-          error: (oError) => {
-              console.error("Error fetching data: ", oError);
-          }
+        success: (oData) => {
+          var oSearchModel = new JSONModel(oData.results);
+          this._oValueHelpDialog.getTable().setModel(oSearchModel);
+          this._oValueHelpDialog.getTable().bindRows("/");
+        },
+        error: (oError) => {
+          console.error("Error fetching data: ", oError);
+        }
       });
       // Open the ValueHelpDialog
       this._oValueHelpDialog.open();
-  }
+    }, 
+    onBeforeRebindTable: function(oEvent) {
+      var oBindingParams = oEvent.getParameter("bindingParams");
+      var oDocNoFilter = this.byId("multiInputFilter");
+      
+      if (oDocNoFilter) {
+          var aDocNoTokens = oDocNoFilter.getTokens();
+          
+          if (aDocNoTokens && aDocNoTokens.length > 0) {
+              aDocNoTokens.forEach(function(oToken) {
+                  var sValue = oToken.getKey();
+                  oBindingParams.filters.push(new Filter("ID", FilterOperator.EQ, sValue));
+              });
+          }
+      }
+      
+      console.log("Filters:", oBindingParams.filters);
+    },
   });
 });

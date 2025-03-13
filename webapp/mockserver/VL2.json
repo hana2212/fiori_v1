@@ -1,0 +1,103 @@
+[
+	{
+		"__metadata": {
+			"id": "VL2('0001')",
+			"uri": "VL2('0001')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0001",
+		"CustomerNameVL2": "Pedro Afonso",
+		"CountryVL2": "Brazil",
+		"CityVL2": "Sao Paulo"
+	},{
+		"__metadata": {
+			"id": "VL2('0002')",
+			"uri": "VL2('0002')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0002",
+		"CustomerNameVL2": "Antonio Moreno",
+		"CountryVL2": "Mexico",
+		"CityVL2": "México D.F."
+	},{
+		"__metadata": {
+			"id": "VL2('0003')",
+			"uri": "VL2('0003')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0003",
+		"CustomerNameVL2": "Francisco Chang",
+		"CountryVL2": "Mexico",
+		"CityVL2": "México D.F."
+	},{
+		"__metadata": {
+			"id": "VL2('0004')",
+			"uri": "VL2('0004')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0004",
+		"CustomerNameVL2": "Thomas Hardy",
+		"CountryVL2": "UK",
+		"CityVL2": "London"
+	},{
+		"__metadata": {
+			"id": "VL2('0005')",
+			"uri": "VL2('0005')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0005",
+		"CustomerNameVL2": "Ana Trujillo",
+		"CountryVL2": "Mexico",
+		"CityVL2": "México D.F."
+	},{
+		"__metadata": {
+			"id": "VL2('0006')",
+			"uri": "VL2('0006')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0006",
+		"CustomerNameVL2": "Christina Berglund",
+		"CountryVL2": "Sweden",
+		"CityVL2": "Luleå"
+	},{
+		"__metadata": {
+			"id": "VL2('0007')",
+			"uri": "VL2('0007')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0007",
+		"CustomerNameVL2": "Martín Sommer",
+		"CountryVL2": "Spain",
+		"CityVL2": "Madrid"
+	},{
+		"__metadata": {
+			"id": "VL2('0008')",
+			"uri": "VL2('0008')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0008",
+		"CustomerNameVL2": "Hanna Moos",
+		"CountryVL2": "Germany",
+		"CityVL2": "Mannheim"
+	},{
+		"__metadata": {
+			"id": "VL2('0009')",
+			"uri": "VL2('0009')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0009",
+		"CustomerNameVL2": "Laurence Lebihan",
+		"CountryVL2": "France",
+		"CityVL2": "Marseille"
+	},{
+		"__metadata": {
+			"id": "VL2('0010')",
+			"uri": "VL2('0010')",
+			"type": "Namespace.VL2Type"
+		},
+		"CustomerIdVL2": "0010",
+		"CustomerNameVL2": "Maria Anders",
+		"CountryVL2": "Germany",
+		"CityVL2": "Berlin"
+	}
+]

@@ -7,7 +7,7 @@
                 <Key>
                     <PropertyRef Name="ID"/>
                 </Key>
-                <Property Name="ID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ID" sap:creatable="false"  />
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:filter-restriction="multi-value"/>
                 <Property Name="NAME" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="NAME" sap:creatable="false"  />
                 <Property Name="DEPART" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="DEPART" sap:creatable="false" />
             </EntityType>
