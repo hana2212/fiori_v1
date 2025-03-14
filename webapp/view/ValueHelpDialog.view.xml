@@ -1,0 +1,79 @@
+<mvc:View height="100%" controllerName="fiori2.controller.ValueHelpDialog"
+		  xmlns:mvc="sap.ui.core.mvc"
+		  xmlns:form="sap.ui.layout.form"
+		  xmlns:core="sap.ui.core"
+		  xmlns="sap.m">
+
+	<form:SimpleForm editable="true">
+		<Label text="Products (Advanced Search without suggestions)" labelFor="multiInput"/>
+		<MultiInput
+			id="multiInput"
+			width="60%"
+			valueHelpRequest=".onValueHelpRequested"
+			suggestionRows="{
+				path: '/ZSALESREPORT',
+				length: 10
+			}">
+			<suggestionColumns>
+				<Column>
+					<Label text="Product Code"/>
+				</Column>
+				<Column>
+					<Label text="Product Name"/>
+				</Column>
+			</suggestionColumns>
+			<suggestionRows>
+				<ColumnListItem>
+					<Label text="{ProductCode}" />
+					<Label text="{ProductName}" />
+				</ColumnListItem>
+			</suggestionRows>
+		</MultiInput>
+		<Label text="Products (Advanced Search with suggestions)" labelFor="multiInputWithSuggestions"/>
+		<MultiInput
+			id="multiInputWithSuggestions"
+			valueHelpRequest=".onValueHelpWithSuggestionsRequested"
+			width="60%"
+			suggestionRows="{
+				path: '/ZSALESREPORTSuggestions',
+				length: 10
+			}">
+			<suggestionColumns>
+				<Column>
+					<Label text="Product Code"/>
+				</Column>
+				<Column>
+					<Label text="Product Name"/>
+				</Column>
+			</suggestionColumns>
+			<suggestionRows>
+				<ColumnListItem>
+					<Label text="{ProductCode}" />
+					<Label text="{ProductName}" />
+				</ColumnListItem>
+			</suggestionRows>
+		</MultiInput>
+		<Label text="ValueHelpDialog with whitespace visualisation" labelFor="whiteSpaces"/>
+		<MultiInput id="whiteSpaces"
+			valueHelpRequest=".onWhitespaceVHRequested"
+			showSuggestion="true"
+			width="60%"
+			suggestionItems="{
+				path: '/ZSALESREPORTWhitespace',
+				length: 10
+			}">
+			<suggestionItems>
+				<core:ListItem
+					key="{ProductCode}"
+					text="{
+						path : 'ProductCode',
+						formatter : '.whitespace2Char'
+					}"
+					additionalText="{
+						path : 'ProductName',
+						formatter : '.whitespace2Char'
+					}"/>
+			</suggestionItems>
+		</MultiInput>
+	</form:SimpleForm>
+</mvc:View>

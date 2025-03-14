@@ -15,7 +15,7 @@ sap.ui.define([
 ], function (compLibrary, Controller, TypeString, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ODataModel, UIColumn, MColumn, Text) {
 	"use strict";
 
-	return Controller.extend("sap.ui.comp.sample.valuehelpdialog.recommended.ValueHelpDialog", {
+	return Controller.extend("fiori2.controller.ValueHelpDialog", {
 		onInit: function () {
 			var oMultiInput, oMultiInputWithSuggestions;
 			// Value Help Dialog standard use case with filter bar without filter suggestions
@@ -47,7 +47,7 @@ sap.ui.define([
 		onValueHelpRequested: function() {
 			this._oBasicSearchField = new SearchField();
 			this.loadFragment({
-				name: "sap.ui.comp.sample.valuehelpdialog.recommended.ValueHelpDialogFilterbar"
+				name: "fiori2.controller.ValueHelpDialogFilterbar"
 			}).then(function(oDialog) {
 				var oFilterBar = oDialog.getFilterBar(), oColumnProductCode, oColumnProductName;
 				this._oVHD = oDialog;
@@ -145,7 +145,7 @@ sap.ui.define([
 			this._oBasicSearchFieldWithSuggestions = new SearchField();
 
 			this.pDialogWithSuggestions = this.loadFragment({
-				name: "sap.ui.comp.sample.valuehelpdialog.recommended.ValueHelpDialogFilterbarWithSuggestions"
+				name: "fiori2.controller.ValueHelpDialogFilterbarWithSuggestions"
 			}).then(function(oDialogSuggestions) {
 				var oFilterBar = oDialogSuggestions.getFilterBar(), oColumnProductCode, oColumnProductName;
 				this._oVHDWithSuggestions = oDialogSuggestions;
@@ -288,7 +288,7 @@ sap.ui.define([
 			});
 
 			this.pWhitespaceDialog = this.loadFragment({
-				name: "sap.ui.comp.sample.valuehelpdialog.recommended.ValueHelpDialogWhitespaces"
+				name: "fiori2.controller.ValueHelpDialogWhitespaces"
 			}).then(function(oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar(), oColumnProductCode, oColumnProductName;
 				this.oWhitespaceDialog = oWhitespaceDialog;

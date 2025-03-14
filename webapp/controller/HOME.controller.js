@@ -126,8 +126,10 @@ sap.ui.define([
       console.log("next page");
       
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      oRouter.navTo("test");
+      //oRouter.navTo("test");
+       oRouter.navTo("ValueHelpDialog");
     },
+    
     onColumnListItemPress: function (oEvent) {
       var sSelectedId = oEvent.getSource().getBindingContext().getProperty("ID");
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

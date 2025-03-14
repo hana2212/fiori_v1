@@ -110,6 +110,13 @@
                     "target": [
                         "test"
                     ]
+                }, 
+                {
+                    "name": "ValueHelpDialog",
+                    "pattern": "ValueHelpDialog",
+                    "target": [
+                        "ValueHelpDialog"
+                    ]
                 }
             ],
             "targets": {
@@ -124,6 +131,10 @@
                 "test": {
                     "id": "test",
                     "name": "test"
+                }, 
+                "ValueHelpDialog": {
+                    "id": "ValueHelpDialog",
+                    "name": "ValueHelpDialog"
                 }
             }
         },
@@ -131,20 +142,7 @@
             "viewName": "fiori2.view.App",
             "type": "XML",
             "id": "App"
-        }, 
-        "config": {
-			"sample": {
-				"stretch": true,
-				"files": [
-					"test.controller.js",
-					"test.view.xml",
-					"mockserver/MainEntitySet.json",
-					"mockserver/metadata.xml",
-					"mockserver/VL1.json",
-					"mockserver/VL2.json",
-					"manifest.json"
-				]
-			}
-		}
+        }
+       
     }
 }

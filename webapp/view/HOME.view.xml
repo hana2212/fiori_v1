@@ -15,8 +15,8 @@
                 <smartFilterBar:controlConfiguration>
                     <smartFilterBar:ControlConfiguration key="ID" visibleInAdvancedArea="true" >
                         <smartFilterBar:customControl>
-                            <MultiInput id="multiInputFilter" valueHelpRequest="onValueHelpRequestFilter" > 
-                            </MultiInput>
+                            <!-- <MultiInput id="multiInputFilter" valueHelpRequest="onValueHelpRequestFilter" > 
+                            </MultiInput> -->
                         </smartFilterBar:customControl>
                     </smartFilterBar:ControlConfiguration>                
                     <smartFilterBar:ControlConfiguration key="DEPART" visibleInAdvancedArea="true" />
