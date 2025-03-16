@@ -12,21 +12,21 @@
 		key="ProductCode"
 		descriptionKey="ProductName">
 		<filterBar>
-			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch">
 				<fb:filterGroupItems>
 					<fb:FilterGroupItem
 						groupName="__$INTERNAL$"
-						name="ProductCode"
-						label="Product Code"
+						name="ID"
+						label="ID"
 						visibleInFilterBar="true">
 						<fb:control>
-							<m:Input name="ProductCode" />
+							<m:Input name="ID" />
 						</fb:control>
 					</fb:FilterGroupItem>
 					<fb:FilterGroupItem
 						groupName="__$INTERNAL$"
-						name="ProductName"
-						label="Product Name"
+						name="NAME"
+						label="Name"
 						visibleInFilterBar="true">
 						<fb:control>
 							<m:Input name="ProductName" />
