@@ -29,7 +29,7 @@ sap.ui.define([
           console.log("can not get data");
         }
 
-      })
+      })   
     },
     onCloseDialog: function () {
       var oDialog = this.byId("inputDialog");
