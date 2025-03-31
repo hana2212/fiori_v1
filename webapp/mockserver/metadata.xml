@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="ZSALESREPORT_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="ZSALESREPORTType" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="ProductCode" />
+        </Key>
+        <Property Name="ProductCode" Type="Edm.String" Nullable="false" sap:text="ProductName" MaxLength="10" sap:label="Product Code" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" sap:label="Product Name" />
+      </EntityType>
+      <EntityType Name="ZSALESREPORTSuggestionsType" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="ProductCode" />
+        </Key>
+        <Property Name="ProductCode" Type="Edm.String" Nullable="false" sap:text="ProductName" MaxLength="10" sap:label="Product Code" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" sap:label="Product Name" />
+      </EntityType>
+      <EntityType Name="ZSALESREPORTWhitespaceType" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="ProductCode" />
+        </Key>
+        <Property Name="ProductCode" Type="Edm.String" Nullable="false" sap:text="ProductName" MaxLength="10" sap:label="Product Code" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" sap:label="Product Name" />
+      </EntityType>
+      <EntityContainer Name="ZSALESREPORT_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+        <EntitySet Name="ZSALESREPORT" EntityType="ZSALESREPORT_CDS.ZSALESREPORTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" />
+        <EntitySet Name="ZSALESREPORTSuggestions" EntityType="ZSALESREPORT_CDS.ZSALESREPORTSuggestionsType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" />
+        <EntitySet Name="ZSALESREPORTWhitespace" EntityType="ZSALESREPORT_CDS.ZSALESREPORTWhitespaceType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" />
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
