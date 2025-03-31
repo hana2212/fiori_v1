@@ -219,6 +219,7 @@ sap.ui.define([
                 supportRangesOnly: true,
                 key: "NAME",
                 descriptionKey: "NAME",
+                // Replace the ok function in _oNameValueHelpDialog configuration
                 ok: function (oEvent) {
                   try {
                     var aTokens = [];
@@ -234,42 +235,40 @@ sap.ui.define([
                         var oCondition = oSelectedRanges[key];
                         console.log("Processing condition:", oCondition);
 
-                        if (!oCondition.exclude) {  // Only include non-excluded conditions
+                        if (!oCondition.exclude) {
                           var sText;
                           switch (oCondition.operation) {
                             case "BT":
-                              sText = oCondition.value1 + "..." + oCondition.value2;
+                              sText = `${oCondition.value1}...${oCondition.value2}`;
                               break;
                             case "Contains":
-                              sText = "Contains " + oCondition.value1;
+                              sText = `*${oCondition.value1}*`;
                               break;
                             case "StartsWith":
-                              sText = "Starts with " + oCondition.value1;
+                              sText = `${oCondition.value1}*`;
                               break;
                             case "EndsWith":
-                              sText = "Ends with " + oCondition.value1;
+                              sText = `*${oCondition.value1}`;
                               break;
                             case "EQ":
-                              sText = "= " + oCondition.value1;
+                              sText = `=${oCondition.value1}`;
                               break;
                             case "GT":
-                              sText = "> " + oCondition.value1;
+                              sText = `>${oCondition.value1}`;
                               break;
                             case "LT":
-                              sText = "< " + oCondition.value1;
+                              sText = `<${oCondition.value1}`;
                               break;
                             default:
-                              sText = oCondition.operation + " " + oCondition.value1;
+                              sText = `${oCondition.operation} ${oCondition.value1}`;
                           }
 
+                          // Create token with same format as Selected Condition
                           aTokens.push(new sap.m.Token({
-                            key: JSON.stringify({
-                              operation: oCondition.operation,
-                              value1: oCondition.value1,
-                              value2: oCondition.value2,
-                              keyField: oCondition.keyField
-                            }),
-                            text: sText
+                            key: JSON.stringify(oCondition),
+                            text: sText,
+                            // Add tooltip to show full condition
+                            tooltip: `${oCondition.operation} ${oCondition.value1}${oCondition.value2 ? ' to ' + oCondition.value2 : ''}`
                           }));
                         }
                       }
@@ -392,107 +391,87 @@ sap.ui.define([
       this._oValueHelpDialog.open();
     },
     // apply filter Name to the dialog
-    _onFilterBarSearch: function() {
+    _onFilterBarSearch: function () {
       try {
-          var oTable = this._oValueHelpDialog.getTable();
-          var oBinding = oTable.getBinding("rows");
-          var aFilters = [];
-  
-          // Get input from Name filter
-          var oNameInput = this._oNameInput;
-          if (oNameInput) {
-              var sInputValue = oNameInput.getValue();
-              
-              // Handle direct input
-              if (sInputValue && sInputValue.trim() !== "") {
-                  // Create new condition object
-                  var oCondition = {
-                      operation: "EQ",
-                      value1: sInputValue,
-                      value2: null,
-                      keyField: "NAME"
-                  };
-  
-                  // Create token with proper JSON string
-                  var oToken = new sap.m.Token({
-                      key: JSON.stringify(oCondition),
-                      text: "=" + sInputValue
-                  });
-  
-                  // Set single token and clear input
-                  oNameInput.setTokens([oToken]);
-                  oNameInput.setValue("");
-  
-                  // Create and add filter
-                  aFilters.push(new Filter("NAME", FilterOperator.EQ, sInputValue));
-              } else {
-                  // Process existing tokens if any
-                  var aTokens = oNameInput.getTokens();
-                  if (aTokens && aTokens.length > 0) {
-                      aTokens.forEach(function(oToken) {
-                          if (oToken && oToken.getKey()) {
-                              try {
-                                  var oCondition = JSON.parse(oToken.getKey());
-                                  if (oCondition && oCondition.operation && oCondition.value1) {
-                                      var oFilter = null;
-                                      
-                                      switch (oCondition.operation) {
-                                          case "Contains":
-                                              oFilter = new Filter("NAME", FilterOperator.Contains, oCondition.value1);
-                                              break;
-                                          case "StartsWith":
-                                              oFilter = new Filter("NAME", FilterOperator.StartsWith, oCondition.value1);
-                                              break;
-                                          case "EndsWith":
-                                              oFilter = new Filter("NAME", FilterOperator.EndsWith, oCondition.value1);
-                                              break;
-                                          case "EQ":
-                                              oFilter = new Filter("NAME", FilterOperator.EQ, oCondition.value1);
-                                              break;
-                                          case "BT":
-                                              if (oCondition.value2) {
-                                                  oFilter = new Filter("NAME", FilterOperator.BT, oCondition.value1, oCondition.value2);
-                                              }
-                                              break;
-                                          case "GT":
-                                              oFilter = new Filter("NAME", FilterOperator.GT, oCondition.value1);
-                                              break;
-                                          case "LT":
-                                              oFilter = new Filter("NAME", FilterOperator.LT, oCondition.value1);
-                                              break;
-                                          default:
-                                              oFilter = new Filter("NAME", FilterOperator.EQ, oCondition.value1);
-                                      }
-  
-                                      if (oFilter) {
-                                          aFilters.push(oFilter);
-                                      }
-                                  }
-                              } catch (e) {
-                                  console.error("Error processing token:", e);
-                              }
-                          }
-                      });
-                  }
-              }
-  
-              // Apply filters
-              if (aFilters.length > 0) {
-                  oBinding.filter(new Filter({
-                      filters: aFilters,
-                      and: false
-                  }));
-              } else {
-                  oBinding.filter([]);
-              }
-  
-              // Update dialog
-              this._oValueHelpDialog.update();
+        var oTable = this._oValueHelpDialog.getTable();
+        var oBinding = oTable.getBinding("rows");
+        var aFilters = [];
+        var that = this;
+
+        // Get input from Name filter
+        var oNameInput = this._oNameInput;
+        if (oNameInput) {
+          var sInputValue = oNameInput.getValue();
+          var aTokens = oNameInput.getTokens();
+
+          // Handle direct input - convert to equals token
+          if (sInputValue && sInputValue.trim() !== "") {
+            var oNewToken = new sap.m.Token({
+              text: "=" + sInputValue,
+              tooltip: "Equal to " + sInputValue
+            });
+            oNameInput.setTokens([oNewToken]);
+            oNameInput.setValue(""); // Clear input
+            aTokens = [oNewToken]; // Update tokens array with new token
           }
+
+          // Process tokens if they exist
+          if (aTokens && aTokens.length > 0) {
+            aTokens.forEach(function (oToken) {
+              try {
+                // Get tooltip value which contains operation and value
+                var sTooltip = oToken.getTooltip();
+                var oFilter;
+
+                if (sTooltip) {
+                  if (sTooltip.startsWith("Contains")) {
+                    var value = sTooltip.substring("Contains ".length);
+                    oFilter = new Filter("NAME", FilterOperator.Contains, value);
+                  } else if (sTooltip.startsWith("Equal to")) {
+                    var value = sTooltip.substring("Equal to ".length);
+                    oFilter = new Filter("NAME", FilterOperator.EQ, value);
+                  } else if (sTooltip.startsWith("Starts with")) {
+                    var value = sTooltip.substring("Starts with ".length);
+                    oFilter = new Filter("NAME", FilterOperator.StartsWith, value);
+                  } else if (sTooltip.startsWith("Ends with")) {
+                    var value = sTooltip.substring("Ends with ".length);
+                    oFilter = new Filter("NAME", FilterOperator.EndsWith, value);
+                  } else if (sTooltip.startsWith("Greater than")) {
+                    var value = sTooltip.substring("Greater than ".length);
+                    oFilter = new Filter("NAME", FilterOperator.GT, value);
+                  } else if (sTooltip.startsWith("Less than")) {
+                    var value = sTooltip.substring("Less than ".length);
+                    oFilter = new Filter("NAME", FilterOperator.LT, value);
+                  }
+
+                  if (oFilter) {
+                    aFilters.push(oFilter);
+                  }
+                }
+              } catch (e) {
+                console.error("Error processing token:", e);
+              }
+            });
+          }
+
+          // Apply combined filters
+          if (aFilters.length > 0) {
+            oBinding.filter(new Filter({
+              filters: aFilters,
+              and: false
+            }));
+          } else {
+            oBinding.filter([]);
+          }
+
+          // Update dialog
+          this._oValueHelpDialog.update();
+        }
       } catch (error) {
-          console.error("Error in filter bar search:", error);
+        console.error("Error in filter bar search:", error);
       }
-  },
+    },
+
     // end add 
     _getFilterOperator: function (sOperator) {
       switch (sOperator) {
