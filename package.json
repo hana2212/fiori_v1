@@ -8,11 +8,16 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
+  "dependencies": {
+    "@mescius/spread-sheets": "^18.0.5",
+    "@mescius/spread-sheets-io": "^18.0.5",
+    "file-saver": "^2.0.5",
+    "jquery": "^3.7.1"
+  },
   "devDependencies": {
-    "@ui5/cli": "^3.0.0",
+    "@sap-ux/ui5-middleware-fe-mockserver": "2",
     "@sap/ux-ui5-tooling": "1",
-    "@sap-ux/ui5-middleware-fe-mockserver": "2"
+    "@ui5/cli": "^3.0.0"
   },
   "scripts": {
     "start": "fiori run --open \"test/flpSandbox.html?sap-client=120&sap-ui-xx-viewCache=false#fiori2-display\"",
